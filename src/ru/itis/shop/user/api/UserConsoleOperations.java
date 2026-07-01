@@ -18,6 +18,7 @@ public class UserConsoleOperations {
     public void showMenu() {
         System.out.println("1. Регистрация пользователя");
         System.out.println("2. Вход в состему");
+        System.out.println("3. Найти пользователя по id");
         System.out.println("0. Выход");
 
         String command = scanner.nextLine();
@@ -38,6 +39,17 @@ public class UserConsoleOperations {
             break;
             case "2": {
                 System.out.println("Вы можете войти в приложение");
+            }
+            break;
+            case "3": {
+                System.out.println("Введите id:");
+                String id = scanner.nextLine();
+                User user = userRepository.findById(id);
+                if (user != null) {
+                    System.out.println(user.getEmail());
+                } else {
+                    System.out.println("Пользователь не найден");
+                }
             }
             break;
             case "0": {
