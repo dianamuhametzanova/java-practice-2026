@@ -1,3 +1,3 @@
-null|diana@gmail.com|20072007|Programmer
-f4ae5532-978c-492c-91b8-b2d68beecf1f|diana@gmail.com|20072007|Programmer
-9098e56f-2a84-40ac-b1fc-df06cf314f6e|oleg@gamil.com|20082008|Matematic
+null|diana@gmail.com|20072007|Prezident
+f4ae5532-978c-492c-91b8-b2d68beecf1f|diana@gmail.com|20072007|Prezident
+9098e56f-2a84-40ac-b1fc-df046cf314f6e|oleg@gamil.com|20082008|Matematic

@@ -3,8 +3,6 @@ package Task2.ru.itis.shop.user.application;
 import Task2.ru.itis.shop.user.domain.User;
 import Task2.ru.itis.shop.user.repository.UserRepository;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Optional;
 
 public class UserService {
@@ -23,13 +21,16 @@ public class UserService {
     public boolean signIn(String email, String password) {
         Optional<User> userOptional = userRepository.findByEmail(email);
 
-        if (userOptional.isPresent()) {
-            return userOptional.get().getPassword().equals(password);
-        } else return false;
+        return userOptional.map(user -> user.getPassword().equals(password)).orElse(false);
     }
 
-    public User findUser(String id) {
+    public User findUserById(String id) {
         Optional<User> userOptional = userRepository.findById(id);
+        return userOptional.orElse(null);
+    }
+
+    public User findUserByEmail(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
         return userOptional.orElse(null);
     }
 

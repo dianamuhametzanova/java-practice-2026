@@ -31,7 +31,7 @@ public class UserConsoleOperations {
             }
             break;
             case "3": {
-                findUser();
+                findUserById();
             }
             break;
             case "4": {
@@ -80,10 +80,10 @@ public class UserConsoleOperations {
         }
     }
 
-    private void findUser() {
+    private void findUserById() {
         System.out.println("Введите id:");
         String id = scanner.nextLine();
-        User user = userService.findUser(id);
+        User user = userService.findUserById(id);
         if (user != null) {
             System.out.println(user.getEmail());
         } else {
@@ -94,11 +94,14 @@ public class UserConsoleOperations {
     private void updateData() {
         System.out.println("Введите email");
         String email = scanner.nextLine();
-        User user = userService.findUser(email);
+        User user = userService.findUserByEmail(email);
         if (user != null) {
             System.out.println("Введите новое описание профиля");
             String profileDescription = scanner.nextLine();
             userService.updateData(email, profileDescription);
+            System.out.println("Данные были обновлены");
+        } else {
+            System.out.println("Пользователя с такоим email не существет");
         }
     }
 }
