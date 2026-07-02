@@ -4,6 +4,8 @@ import Task2.ru.itis.shop.user.domain.User;
 import Task2.ru.itis.shop.user.repository.UserRepository;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -68,5 +70,42 @@ public class UserFileRepository implements UserRepository {
         }
 
         return Optional.empty();
+    }
+
+    @Override
+    public void updateData(String email, String newProfileDescription) {
+
+        List<User> users = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                User user = userMapper.fromLine(line);
+
+                if (user.getEmail().equals(email)) {
+                    user.setProfileDescription(newProfileDescription);
+                }
+                users.add(user);
+            }
+
+        } catch (IOException e1) {
+            throw new IllegalStateException(e1);
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            users.forEach(u -> {
+                try {
+                    writer.write(userMapper.toLine(u));
+                    writer.newLine();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
     }
 }

@@ -34,6 +34,10 @@ public class UserConsoleOperations {
                 findUser();
             }
             break;
+            case "4": {
+                updateData();
+            }
+            break;
             case "0": {
                 System.exit(0);
             }
@@ -45,6 +49,7 @@ public class UserConsoleOperations {
         System.out.println("1. Регистрация пользователя");
         System.out.println("2. Вход в состему");
         System.out.println("3. Найти пользователя по id");
+        System.out.println("4. Обновить данные пользователя");
         System.out.println("0. Выход");
     }
 
@@ -86,4 +91,14 @@ public class UserConsoleOperations {
         }
     }
 
+    private void updateData() {
+        System.out.println("Введите email");
+        String email = scanner.nextLine();
+        User user = userService.findUser(email);
+        if (user != null) {
+            System.out.println("Введите новое описание профиля");
+            String profileDescription = scanner.nextLine();
+            userService.updateData(email, profileDescription);
+        }
+    }
 }

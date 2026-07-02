@@ -10,4 +10,6 @@ public interface UserRepository {
     Optional<User> findByEmail (String email);
 
     Optional<User> findById(String id);
+
+    void updateData(String email, String newProfileDescription);
 }

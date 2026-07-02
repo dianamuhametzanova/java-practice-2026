@@ -3,6 +3,8 @@ package Task2.ru.itis.shop.user.application;
 import Task2.ru.itis.shop.user.domain.User;
 import Task2.ru.itis.shop.user.repository.UserRepository;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Optional;
 
 public class UserService {
@@ -29,5 +31,9 @@ public class UserService {
     public User findUser(String id) {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional.orElse(null);
+    }
+
+    public void updateData(String email, String profileDescription) {
+        userRepository.updateData(email, profileDescription);
     }
 }
