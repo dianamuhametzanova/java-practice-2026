@@ -43,6 +43,23 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     @Override
+    public List<Optional<User>> findByProfileDescription(String profileDescription) {
+        List<Optional<User>> users = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()) {
+            try (Statement statement = connection.createStatement()) {
+                try (ResultSet resultSet = statement.executeQuery("select * from account where profileDescription = 'student'")) {
+                    while (resultSet.next()) {
+                        users.add(Optional.of(userRowMapper.mapRow(resultSet)));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+        return users;
+    }
+
+    @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         try (Connection connection = dataSource.getConnection()) {

@@ -12,5 +12,7 @@ public interface UserRepository {
 
     Optional<User> findById(Integer id);
 
+    List<Optional<User>> findByProfileDescription(String profileDescription);
+
     List<User> findAll();
 }

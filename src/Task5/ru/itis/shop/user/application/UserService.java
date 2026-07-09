@@ -35,6 +35,14 @@ public class UserService {
         return userOptional.orElse(null);
     }
 
+    public List<User> findByProfileDescription(String profileDescription) {
+        List<Optional<User>> usersOptional = userRepository.findByProfileDescription(profileDescription);
+        return usersOptional.stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .toList();
+    }
+
     public List<User> findAll() {
         return userRepository.findAll();
     }

@@ -35,6 +35,10 @@ public class UserConsoleOperations {
                 findUserById();
             }
             break;
+            case "4": {
+                findByProfileDescription();
+            }
+            break;
             case "5": {
                 findAll();
             }
@@ -50,7 +54,7 @@ public class UserConsoleOperations {
         System.out.println("1. Регистрация пользователя");
         System.out.println("2. Вход в состему");
         System.out.println("3. Найти пользователя по id");
-        System.out.println("4. Обновить данные пользователя");
+        System.out.println("4. Показать информацию о пользователях с заданным profileDescription");
         System.out.println("5. Показать всех пользователей");
         System.out.println("0. Выход");
     }
@@ -86,8 +90,14 @@ public class UserConsoleOperations {
 
     }
 
+    private void findByProfileDescription() {
+        System.out.println("Введите profileDescription");
+        String profileDescription = scanner.nextLine();
+        List<User> users = userService.findByProfileDescription(profileDescription);
+        users.forEach(a -> System.out.println(a.getName()));
+    }
 
-    public void findAll() {
+    private void findAll() {
         System.out.println("Все пользователи:");
         List<User> users = userService.findAll();
         users.forEach(a -> System.out.println(a.toString()));
