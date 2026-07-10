@@ -26,29 +26,36 @@ public class UserService {
         return userOptional.map(user -> user.getPassword().equals(password)).orElse(false);
     }
 
-    public User findUserById(Integer id) {
+    public UserDto findUserById(Integer id) {
         Optional<User> userOptional = userRepository.findById(id);
-        return userOptional.orElse(null);
+        return getUserDto(userOptional.orElse(null));
     }
 
     public UserDto findUserByEmail(String email) {
-        Optional<UserDto> userOptional = userRepository.findByEmail(email);
-        return userOptional.orElse(null);
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        return getUserDto(userOptional.orElse(null));
     }
 
     public void updateData(String email, String profileDescription) {
-
+        userRepository.updateData(email, profileDescription);
     }
 
-    public List<User> findByProfileDescription(String profileDescription) {
+    public List<UserDto> findByProfileDescription(String profileDescription) {
         List<Optional<User>> usersOptional = userRepository.findByProfileDescription(profileDescription);
         return usersOptional.stream()
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .map(this::getUserDto)
                 .toList();
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDto> findAll() {
+        return userRepository.findAll().stream()
+                .map(this::getUserDto)
+                .toList();
+    }
+
+    private UserDto getUserDto(User user) {
+        return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getProfileDescription());
     }
 }

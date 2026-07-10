@@ -13,6 +13,16 @@ public class UserDto {
         this.profileDescription = profileDescription;
     }
 
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", profileDescription='" + profileDescription + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

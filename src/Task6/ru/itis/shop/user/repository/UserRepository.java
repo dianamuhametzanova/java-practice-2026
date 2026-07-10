@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
-    void save (User user);
+    void save(User user);
 
-    Optional<UserDto> findByEmail (String email);
+    Optional<User> findByEmail(String email);
 
-    Optional<UserDto> findById(Integer id);
+    Optional<User> findById(Integer id);
+
+    void updateData(String email, String profileDescription);
 
     List<Optional<User>> findByProfileDescription(String profileDescription);
 

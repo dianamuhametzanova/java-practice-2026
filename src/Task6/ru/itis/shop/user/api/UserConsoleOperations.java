@@ -91,16 +91,16 @@ public class UserConsoleOperations {
         if (userService.signIn(email, password)) {
             System.out.println("Вы вошли в приложение");
         } else {
-            System.out.println("email или пароль не верны");
+            System.out.println("email или password не верны");
         }
     }
 
     private void findUserById() {
         System.out.println("Введите id:");
         Integer id = scanner.nextInt();
-        User user = userService.findUserById(id);
+        UserDto user = userService.findUserById(id);
         if (user != null) {
-            System.out.println(user.toString());
+            System.out.println(user.getName());
         } else {
             System.out.println("Пользователь не найден");
         }
@@ -109,7 +109,7 @@ public class UserConsoleOperations {
     private void findByProfileDescription() {
         System.out.println("Введите profileDescription");
         String profileDescription = scanner.nextLine();
-        List<User> users = userService.findByProfileDescription(profileDescription);
+        List<UserDto> users = userService.findByProfileDescription(profileDescription);
         users.forEach(a -> System.out.println(a.getName()));
     }
 
@@ -130,7 +130,7 @@ public class UserConsoleOperations {
 
     private void findAll() {
         System.out.println("Все пользователи:");
-        List<User> users = userService.findAll();
+        List<UserDto> users = userService.findAll();
         users.forEach(a -> System.out.println(a.toString()));
     }
 }
