@@ -1,0 +1,20 @@
+package Task7.main.java.ru.itis.shop.user.repository;
+
+import ru.itis.shop.user.domain.User;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface UserRepository {
+    void save(User user);
+
+    Optional<User> findByEmail(String email);
+
+    Optional<User> findById(Integer id);
+
+    void updateData(String email, String profileDescription);
+
+    List<Optional<User>> findByProfileDescription(String profileDescription);
+
+    List<User> findAll();
+}
